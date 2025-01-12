@@ -1,0 +1,88 @@
+services:
+  comfyui:
+    image: comfyui:0.3.10-cuda-12.4
+    container_name: comfyui
+    hostname: "comfyui"
+    entrypoint:
+      - "/bin/bash"
+      - "/comfyui/start.sh"
+    networks:
+      - ai-apps
+    ports:
+      - "8082:8082/tcp"
+    volumes:
+      - "comfyui_models:/comfyui/ComfyUI/models"
+      - "comfyui_nodes:/comfyui/ComfyUI/custom_nodes"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  sdnext:
+    container_name: "sdnext"
+    hostname: "sdnext"
+    entrypoint:
+      - "/bin/bash"
+      - "/sdnext/start.sh"
+    image: "localhost:5000/sdnext:cuda-12.4"
+    networks:
+      - ai-apps
+    ports:
+      - "7860:7860/tcp"
+    volumes:
+      - "comfyui_models:/sdnext/automatic/models"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  ollama:
+    command:
+      - "serve"
+    container_name: "ollama"
+    hostname: "ollama"
+    image: "ollama/ollama:0.5.5"
+    networks:
+      - ai-apps
+    ports:
+      - "11434:11434/tcp"
+    volumes:
+      - "ollama:/root/.ollama"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  openui:
+    container_name: openui
+    hostname: "openui"
+    image: "ghcr.io/open-webui/open-webui:main"
+    networks:
+      - ai-apps
+    ports:
+      - "8080:8080/tcp"
+    volumes:
+      - "openwebui:/app/backend/data"
+
+networks:
+  ai-apps:
+    external: true
+
+volumes:
+  comfyui_models:
+    external: true
+  comfyui_nodes:
+    external: true
+  ollama:
+    external: true
+  openwebui:
+    external: true

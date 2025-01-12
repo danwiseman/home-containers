@@ -1,0 +1,19 @@
+services:
+  homeassistant:
+    container_name: "homeassistant"
+    hostname: "homeassistant"
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    ports:
+      - "8123:8123/tcp"
+    volumes:
+      - "homeassistant:/config"
+    networks:
+      - home-apps
+networks:
+  home-apps:
+     external: true
+
+
+volumes:
+  homeassistant:
+    external: true

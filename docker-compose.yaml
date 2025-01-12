@@ -1,0 +1,30 @@
+services:
+  nginx:
+    container_name: "nginx"
+    hostname: "nginx"
+    image: "jc21/nginx-proxy-manager:latest"
+    networks:
+      - ai-apps
+      - home-apps
+      - nginx-net
+    ports:
+      - "443:443/tcp"
+      - "80:80/tcp"
+      - "8081:81/tcp"
+    volumes:
+      - "nginx:/data"
+      - "nginx_lets:/etc/letsencrypt"
+
+networks:
+  ai-apps:
+    external: true
+  home-apps:
+    external: true
+  nginx-net:
+    driver: bridge
+
+volumes:
+  nginx:
+    external: true
+  nginx_lets:
+    external: true
