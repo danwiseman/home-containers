@@ -6,6 +6,7 @@ services:
     networks:
       - ai-apps
       - home-apps
+      - dev-apps
       - nginx-net
     ports:
       - "443:443/tcp"
@@ -19,6 +20,8 @@ networks:
   ai-apps:
     external: true
   home-apps:
+    external: true
+  dev-apps:
     external: true
   nginx-net:
     driver: bridge
