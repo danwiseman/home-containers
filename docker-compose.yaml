@@ -15,6 +15,7 @@ services:
     volumes:
       - "nginx:/data"
       - "nginx_lets:/etc/letsencrypt"
+      - "nginx_certs:/opt/certs"
 
 networks:
   ai-apps:
@@ -30,4 +31,6 @@ volumes:
   nginx:
     external: true
   nginx_lets:
+    external: true
+  nginx_certs:
     external: true
