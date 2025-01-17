@@ -33,6 +33,19 @@ services:
       - "nifi_pr:/opt/nifi/nifi-current/provenance_repository"
       - "nifi_logs:/opt/nifi/nifi-current/logs"
       - "nifi_state:/opt/nifi/nifi-current/state"
+  mongodb:
+    container_name: mongodb
+    hostname: mongodb
+    image: mongodb/mongodb-community-server:latest
+    networks:
+      - dev-apps
+    environment:
+      - MONGODB_INITDB_ROOT_USERNAME=${NIFI_ADMIN_USER:-admin}
+      - MONGODB_INITDB_ROOT_PASSWORD=${NIFI_ADMIN_PASS:-admin1234567890}
+    ports:
+      - "27017:27017/tcp"
+    volumes:
+      - "mongodb_data:/data/db"
 
 
 
@@ -69,4 +82,6 @@ volumes:
   nifi_logs:
     external: true
   nifi_state:
+    external: true
+  mongodb_data:
     external: true
