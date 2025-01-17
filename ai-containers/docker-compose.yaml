@@ -1,11 +1,8 @@
 services:
   comfyui:
-    image: comfyui:0.3.10-cuda-12.4
+    image: ghcr.io/burritocatai/comfyui:v0.3.10-cuda-12.4.0
     container_name: comfyui
     hostname: "comfyui"
-    entrypoint:
-      - "/bin/bash"
-      - "/comfyui/start.sh"
     networks:
       - ai-apps
     ports:
@@ -24,10 +21,7 @@ services:
   sdnext:
     container_name: "sdnext"
     hostname: "sdnext"
-    entrypoint:
-      - "/bin/bash"
-      - "/sdnext/start.sh"
-    image: "localhost:5000/sdnext:cuda-12.4"
+    image: ghcr.io/burritocatai/sdnext:cuda-12.4.0
     networks:
       - ai-apps
     ports:
