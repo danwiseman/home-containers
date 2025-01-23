@@ -38,6 +38,8 @@ services:
     image: docker.io/bitnami/kafka:3.9
     hostname: "kafka"
     container_name: "kafka"
+    networks:
+      - dev-apps
     ports:
       - "9092:9092"
     volumes:
@@ -53,6 +55,17 @@ services:
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+  elasticsearch:
+    image: docker.io/bitnami/elasticsearch:8
+    hostname: "elasticsearch"
+    container_name: "elasticsearch"
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    networks:
+      - dev-apps
+    volumes:
+      - 'elasticsearch_data:/bitnami/elasticsearch/data'
   mongodb:
     container_name: mongodb
     hostname: mongodb
@@ -106,6 +119,8 @@ volumes:
   kafka_data:
     external: true
   mongodb_data:
+    external: true
+  elasticsearch_data:
     external: true
   comfyui_models:
     external: true
