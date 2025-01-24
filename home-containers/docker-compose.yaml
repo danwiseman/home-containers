@@ -3,6 +3,9 @@ services:
     container_name: "homeassistant"
     hostname: "homeassistant"
     image: "ghcr.io/home-assistant/home-assistant:stable"
+    environment:
+      - NGINX_IP=${NGINX_IP}
+      - GH_TOKEN=${GH_TOKEN}
     ports:
       - "8123:8123/tcp"
     volumes:
