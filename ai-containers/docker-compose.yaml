@@ -8,6 +8,7 @@ services:
     volumes:
       - "comfyui_models:/comfyui/ComfyUI/models"
       - "comfyui_nodes:/comfyui/ComfyUI/custom_nodes"
+      - "comfyui_output:/comfyui/ComfyUI/output"
     deploy:
       resources:
         reservations:
@@ -67,6 +68,8 @@ volumes:
   comfyui_models:
     external: true
   comfyui_nodes:
+    external: true
+  comfyui_output:
     external: true
   ollama:
     external: true
