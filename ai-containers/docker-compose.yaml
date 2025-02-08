@@ -1,6 +1,6 @@
 services:
   comfyui:
-    image: ghcr.io/burritocatai/comfyui:v0.3.10-cuda-12.4.0
+    image: ghcr.io/burritocatai/comfyui:v0.3.14-cuda-12.4.0
     container_name: comfyui
     hostname: "comfyui"
     networks:
@@ -9,13 +9,13 @@ services:
       - "comfyui_models:/comfyui/ComfyUI/models"
       - "comfyui_nodes:/comfyui/ComfyUI/custom_nodes"
       - "comfyui_output:/comfyui/ComfyUI/output"
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+#    deploy:
+#      resources:
+#        reservations:
+#          devices:
+#            - driver: nvidia
+#              count: 1
+#              capabilities: [gpu]
 
   sdnext:
     container_name: "sdnext"
@@ -25,13 +25,13 @@ services:
       - ai-apps
     volumes:
       - "comfyui_models:/sdnext/automatic/models"
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+#    deploy:
+#      resources:
+#        reservations:
+#          devices:
+#            - driver: nvidia
+#              count: 1
+#              capabilities: [gpu]
 
   ollama:
     command:
@@ -43,13 +43,13 @@ services:
       - ai-apps
     volumes:
       - "ollama:/root/.ollama"
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+#    deploy:
+#      resources:
+#        reservations:
+#          devices:
+#            - driver: nvidia
+#              count: 1
+#              capabilities: [gpu]
 
   openui:
     container_name: openui

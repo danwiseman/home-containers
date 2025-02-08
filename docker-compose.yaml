@@ -16,6 +16,13 @@ services:
       - "nginx:/data"
       - "nginx_lets:/etc/letsencrypt"
       - "nginx_certs:/opt/certs"
+  registry:
+    container_name: "docker-registry"
+    image: "registry:2"
+    networks:
+      - nginx-net
+    volumes:
+      - "docker_registry:/var/lib/registry"
 
 networks:
   ai-apps:
@@ -25,7 +32,7 @@ networks:
   dev-apps:
     external: true
   nginx-net:
-    driver: bridge
+    external: true
 
 volumes:
   nginx:
@@ -33,4 +40,6 @@ volumes:
   nginx_lets:
     external: true
   nginx_certs:
+    external: true
+  docker_registry:
     external: true
