@@ -17,6 +17,13 @@ services:
 #              count: 1
 #              capabilities: [gpu]
 
+  marker-api:
+    container_name: "marker-api"
+    hostname: "marker-api"
+    image: registry.thewisemans.io/marker-api
+    networks:
+      - ai-apps
+
   sdnext:
     container_name: "sdnext"
     hostname: "sdnext"
