@@ -45,7 +45,7 @@ services:
       - "serve"
     container_name: "ollama"
     hostname: "ollama"
-    image: "ollama/ollama:0.5.5"
+    image: "ollama/ollama:0.5.8"
     networks:
       - ai-apps
     volumes:
