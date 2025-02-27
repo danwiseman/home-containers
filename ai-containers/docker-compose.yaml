@@ -1,6 +1,6 @@
 services:
   comfyui:
-    image: ghcr.io/burritocatai/comfyui:v0.3.14-cuda-12.4.0
+    image: ghcr.io/burritocatai/comfyui:v0.3.18
     container_name: comfyui
     hostname: "comfyui"
     networks:
@@ -20,7 +20,7 @@ services:
   marker-api:
     container_name: "marker-api"
     hostname: "marker-api"
-    image: registry.thewisemans.io/marker-api
+    image: savatar101/omniparse:0.1
     networks:
       - ai-apps
 
@@ -50,13 +50,7 @@ services:
       - ai-apps
     volumes:
       - "ollama:/root/.ollama"
-#    deploy:
-#      resources:
-#        reservations:
-#          devices:
-#            - driver: nvidia
-#              count: 1
-#              capabilities: [gpu]
+
 
   openui:
     container_name: openui
